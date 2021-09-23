@@ -1,2 +1,0 @@
-# gest
-Gamestanbul Gest Token
