@@ -338,7 +338,7 @@ contract Ownable is Context {
   }
 }
 
-contract MyToken is Context, IBEP20, Ownable {
+contract BIGZ is Context, IBEP20, Ownable {
   using SafeMath for uint256;
 
   mapping (address => uint256) private _balances;
@@ -351,10 +351,10 @@ contract MyToken is Context, IBEP20, Ownable {
   string private _name;
 
   constructor() public {
-    _name = "Gamestanbul";
-    _symbol = "GEST";
+    _name = "BiGameZ";
+    _symbol = "BIGZ";
     _decimals = 18;
-    _totalSupply = 1000000000000000;
+    _totalSupply = 100000000000000000000000000000; // 100 million.
     _balances[msg.sender] = _totalSupply;
 
     emit Transfer(address(0), msg.sender, _totalSupply);
@@ -489,19 +489,6 @@ contract MyToken is Context, IBEP20, Ownable {
   }
 
   /**
-   * @dev Creates `amount` tokens and assigns them to `msg.sender`, increasing
-   * the total supply.
-   *
-   * Requirements
-   *
-   * - `msg.sender` must be the token owner
-   */
-  function mint(uint256 amount) public onlyOwner returns (bool) {
-    _mint(_msgSender(), amount);
-    return true;
-  }
-
-  /**
    * @dev Moves tokens `amount` from `sender` to `recipient`.
    *
    * This is internal function is equivalent to {transfer}, and can be used to
@@ -522,23 +509,6 @@ contract MyToken is Context, IBEP20, Ownable {
     _balances[sender] = _balances[sender].sub(amount, "BEP20: transfer amount exceeds balance");
     _balances[recipient] = _balances[recipient].add(amount);
     emit Transfer(sender, recipient, amount);
-  }
-
-  /** @dev Creates `amount` tokens and assigns them to `account`, increasing
-   * the total supply.
-   *
-   * Emits a {Transfer} event with `from` set to the zero address.
-   *
-   * Requirements
-   *
-   * - `to` cannot be the zero address.
-   */
-  function _mint(address account, uint256 amount) internal {
-    require(account != address(0), "BEP20: mint to the zero address");
-
-    _totalSupply = _totalSupply.add(amount);
-    _balances[account] = _balances[account].add(amount);
-    emit Transfer(address(0), account, amount);
   }
 
   /**
